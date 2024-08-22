@@ -32,7 +32,7 @@ export default function SignUpPage() {
 
             console.log(Email + UserName + Password);
 
-            axios.post('http://localhost:8080/api/v1/user/signup', {
+            axios.post('http://localhost:8080/api/v1/user/register', {
                 user_email: Email,
                 user_name: UserName,
                 user_password: Password

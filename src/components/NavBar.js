@@ -8,7 +8,7 @@ export default function NavBar() {
             <Toolbar>
                 <Typography variant="h6" component='div' sx={{ flexGrow: 1 }}>Todo App</Typography>
                 <Stack direction="row" spacing={2}>
-                    <Button variant="h6">Features</Button>
+                    <Button variant="h6" >Features</Button>
                     <Button variant="h6">About Us</Button>
                 </Stack>
             </Toolbar>

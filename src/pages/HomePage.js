@@ -11,6 +11,7 @@ export default function HomePage() {
         <div style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', height: '100vh', width: '100%' }}>
             <NavBar />
             <Container maxWidth='lg'>
+
                 <Box
                     sx={{
                         bborder: '2px solid black',

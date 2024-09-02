@@ -40,10 +40,10 @@ export default function SignInPage(){
                 <Typography variant="h2" align="center">Sign In</Typography>
                 <TextInput field="UserName" value={UserName} onChange={(e) => setUserName(e.target.value)} />
                 <PasswordInput field="Password" value={Password} onChange={(e) => setPassword(e.target.value)} />
-                <Button variant="contained" sx={{ml:'150px', mr: '150px'}} >Sign in</Button>
+                <Button variant="contained" sx={{ml:'150px', mr: '150px'}} onClick={handleSubmit} >Sign in</Button>
             </Box>
             <Box>
-                <img src={sideImg} alt="side image" style={{ width: '613px', height: '613px', top: '330px', left: '711px' }} />
+                <img src={sideImg} alt="side" style={{ width: '613px', height: '613px', top: '330px', left: '711px' }} />
             </Box>
         </Container>
     );

@@ -2,6 +2,7 @@ import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignUpPage";
 import TaskDetails from "./pages/TaskDetails";
 import SignInPage from "./pages/SignInPage";
+import DashBoard from "./pages/DashBoard";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
@@ -14,6 +15,7 @@ function App() {
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/task-details" element={<TaskDetails />} />
         <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/dash-board" element={<DashBoard />} />
       </Routes>
     </Router>
 

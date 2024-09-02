@@ -1,4 +1,3 @@
-import React from "react";
 import { Container, Box, Typography } from "@mui/material";
 import TextInput from "../components/TextInput";
 import PasswordInput from "../components/PasswordInput";

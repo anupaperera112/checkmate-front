@@ -1,50 +1,107 @@
 import { Container, Box, Typography, Button } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import TextInput from "../components/TextInput";
 import PasswordInput from "../components/PasswordInput";
-import sideImg from "../asests/images/ach3 1.png"
+import sideImg from "../asests/images/ach3 1.png";
 import axios from "axios";
 
-export default function SignInPage(){
+export default function SignInPage() {
+  const [UserEmail, setUserEmail] = useState("");
+  const [Password, setPassword] = useState("");
 
-    const [UserName, setUserName] = useState("");
-    const [Password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-    const handleSubmit = () => {
-        if (Password == null || UserName == null) {
-            alert("enter username and password");
-            return;
-        } else {
-
-            console.log(UserName + Password);
-
-            axios.post('http://localhost:8080/api/v1/user/signIn', {
-                user_name: UserName,
-                user_password: Password
-            }).then((response) => {
-                if (response.data.statusCode === 200) {
-                    alert("Sign In Successful");
-                } else {
-                    alert("Sign In Failed");
-                }
-            }).catch((error) => {
-                console.log("Error", error);
-            });
-
-        }
+  const handleSubmit = () => {
+    if (!UserEmail?.trim() || !Password?.trim()) {
+      alert("Please enter a username and password");
+      return;
     }
 
-    return(
-        <Container  className="sign-in-container" maxWidth="lg" sx={{ height: '100vh', display: "flex", mt: 6, mb: 4 }}>
-            <Box sx={{ height: '100vh', display: "flex", ml: '10%', mt:'11.5%', width: '100%', flexDirection: "column", gap: 2}}>
-                <Typography variant="h2" align="center">Sign In</Typography>
-                <TextInput field="UserName" value={UserName} onChange={(e) => setUserName(e.target.value)} />
-                <PasswordInput field="Password" value={Password} onChange={(e) => setPassword(e.target.value)} />
-                <Button variant="contained" sx={{ml:'150px', mr: '150px'}} >Sign in</Button>
-            </Box>
-            <Box>
-                <img src={sideImg} alt="side image" style={{ width: '613px', height: '613px', top: '330px', left: '711px' }} />
-            </Box>
-        </Container>
-    );
+    console.log(`UserEmail: ${UserEmail.trim()}, Password: ${Password.trim()}`);
+
+    axios
+      .post(
+        "http://localhost:8080/api/v1/user/sign-in",
+        {
+          userEmail: UserEmail,
+          userPassword: Password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        if (response.data.status === 200) {
+          const { token, userId } = response.data.data; // Assume userId is returned by your backend
+          console.log("Token", token);
+          console.log("User ID", userId);
+          localStorage.setItem("authToken", token);
+          navigate(`/task-list/${userId}`); // Dynamically navigate to user's task list
+          console.log("Sign In Successful");
+          alert("Sign In Successful");
+        } else {
+          alert("Sign In Failed");
+        }
+      })
+      .catch((error) => {
+        console.log("Error", error);
+        alert("An error occurred during sign-in. Please try again.");
+      });
+  };
+
+  return (
+    <Container
+      className="sign-in-container"
+      maxWidth="lg"
+      sx={{ height: "100vh", display: "flex", mt: 6, mb: 4 }}
+    >
+      <Box
+        sx={{
+          height: "100vh",
+          display: "flex",
+          ml: "10%",
+          mt: "11.5%",
+          width: "100%",
+          flexDirection: "column",
+          gap: 2,
+        }}
+      >
+        <Typography variant="h2" align="center">
+          Sign In
+        </Typography>
+        <TextInput
+          field="UserName"
+          value={UserEmail}
+          onChange={(e) => setUserEmail(e.target.value)}
+        />
+        <PasswordInput
+          field="Password"
+          value={Password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button
+          onClick={handleSubmit}
+          variant="contained"
+          sx={{ ml: "150px", mr: "150px" }}
+        >
+          Sign In
+        </Button>
+      </Box>
+      <Box>
+        <img
+          src={sideImg}
+          alt="side"
+          style={{
+            width: "613px",
+            height: "613px",
+            top: "330px",
+            left: "711px",
+          }}
+        />
+      </Box>
+    </Container>
+  );
 }

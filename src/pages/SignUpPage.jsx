@@ -2,6 +2,7 @@ import { Container, Box, Typography } from "@mui/material";
 import TextInput from "../components/TextInput";
 import PasswordInput from "../components/PasswordInput";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 import sideImage from '../asests/images/sign-up-page-side.avif';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -15,8 +16,11 @@ export default function SignUpPage() {
     const [UserName, setUserName] = useState("");
     const [Password, setPassword] = useState("");
     const [ReEnterPassword, setReEnterPassword] = useState("");
+    
+
 
     const [agreeToTerms, setAgreeToTerms] = useState(false);
+    const navigate = useNavigate();
 
     const handleCheckboxChange = (event) => {
         setAgreeToTerms(event.target.checked);
@@ -36,8 +40,10 @@ export default function SignUpPage() {
                 userName: UserName,
                 userPassword: Password
             }).then((response) => {
-                if (response.data.statusCode === 200) {
+                console.log(response.data);
+                if (response.data.status === 200) {
                     alert("Sign Up Successful");
+                    navigate('/sign-in');
                 } else {
                     alert("Sign Up Failed");
                 }

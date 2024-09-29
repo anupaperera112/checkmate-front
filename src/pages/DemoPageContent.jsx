@@ -37,7 +37,7 @@ function DemoPageContent({ pathname }) {
         alert("You are not sign in. Please sign in to view your tasks.");
         navigate("/sign-in");
       });
-  }, [user_id, category, token]);
+  }, [user_id, category, token, navigate]);
 
   return (
     <Box

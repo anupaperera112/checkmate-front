@@ -75,21 +75,3 @@ const CustomCard = ({task}) => {
 
 export default CustomCard;
 
-{
-  /* <Card variant="outlined">
-  <Box sx={{ padding: 2 }}>
-    <Typography variant="h6">{task.taskTitle || "Task Title"}</Typography>
-    <Typography variant="body2">
-      {task.taskStartDate
-        ? "Start date: " + task.taskStartDate.slice(0, 10)
-        : "Task Description"}
-    </Typography>
-    <Typography variant="body2">
-      {task.taskEndDate
-        ? "End date: " + task.taskEndDate.slice(0, 10)
-        : "Task Description"}
-    </Typography>
-  </Box>
-</Card>; 
-*/
-}

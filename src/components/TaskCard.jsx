@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import CustomCard from "./CustomCard";
 
 export default function TaskCard({ task_id }) {

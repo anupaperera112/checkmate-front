@@ -51,7 +51,6 @@ export default function SignInPage() {
         alert("An error occurred during sign-in. Please try again.");
       });
   };
-
   return (
     <Container
       className="sign-in-container"
@@ -105,3 +104,4 @@ export default function SignInPage() {
     </Container>
   );
 }
+

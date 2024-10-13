@@ -5,6 +5,7 @@ import TextInput from "../components/TextInput";
 import PasswordInput from "../components/PasswordInput";
 import sideImg from "../asests/images/ach3 1.png";
 import axios from "axios";
+import Navbar from "../components/NavBar";
 
 export default function SignInPage() {
   const [UserEmail, setUserEmail] = useState("");
@@ -52,56 +53,58 @@ export default function SignInPage() {
       });
   };
   return (
-    <Container
-      className="sign-in-container"
-      maxWidth="lg"
-      sx={{ height: "100vh", display: "flex", mt: 6, mb: 4 }}
-    >
-      <Box
-        sx={{
-          height: "100vh",
-          display: "flex",
-          ml: "10%",
-          mt: "11.5%",
-          width: "100%",
-          flexDirection: "column",
-          gap: 2,
-        }}
+    <>
+      <Navbar />
+      <Container
+        className="sign-in-container"
+        maxWidth="lg"
+        sx={{ height: "100vh", display: "flex", mt: 6, mb: 4 }}
       >
-        <Typography variant="h2" align="center">
-          Sign In
-        </Typography>
-        <TextInput
-          field="UserName"
-          value={UserEmail}
-          onChange={(e) => setUserEmail(e.target.value)}
-        />
-        <PasswordInput
-          field="Password"
-          value={Password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button
-          onClick={handleSubmit}
-          variant="contained"
-          sx={{ ml: "150px", mr: "150px" }}
-        >
-          Sign In
-        </Button>
-      </Box>
-      <Box>
-        <img
-          src={sideImg}
-          alt="side"
-          style={{
-            width: "613px",
-            height: "613px",
-            top: "330px",
-            left: "711px",
+        <Box
+          sx={{
+            height: "100vh",
+            display: "flex",
+            ml: "10%",
+            mt: "11.5%",
+            width: "100%",
+            flexDirection: "column",
+            gap: 2,
           }}
-        />
-      </Box>
-    </Container>
+        >
+          <Typography variant="h2" align="center">
+            Sign In
+          </Typography>
+          <TextInput
+            field="UserName"
+            value={UserEmail}
+            onChange={(e) => setUserEmail(e.target.value)}
+          />
+          <PasswordInput
+            field="Password"
+            value={Password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            sx={{ ml: "150px", mr: "150px" }}
+          >
+            Sign In
+          </Button>
+        </Box>
+        <Box>
+          <img
+            src={sideImg}
+            alt="side"
+            style={{
+              width: "613px",
+              height: "613px",
+              top: "330px",
+              left: "711px",
+            }}
+          />
+        </Box>
+      </Container>
+    </>
   );
 }
-

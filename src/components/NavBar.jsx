@@ -1,8 +1,12 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Button, Stack } from "@mui/material";
 import logo from "../asests/images/ach3 1.png";
+import { useLocation, Link } from "react-router-dom";
 
 export default function NavBar() {
+  const path = useLocation().pathname;
+  console.log(path);
+
   return (
     <AppBar position="static" sx={{ backgroundColor: "#3f51b5" }}>
       {" "}
@@ -22,11 +26,49 @@ export default function NavBar() {
         >
           CheckMate
         </Typography>
-        <Stack direction="row" spacing={2}>
-          <a
-            href="#features"
-            style={{ textDecoration: "none", color: "white" }}
-          >
+        {path === "/" ? (
+          <Stack direction="row" spacing={2}>
+            <a
+              href="#features"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "#ffffff",
+                  color: "#3f51b5",
+                  "&:hover": {
+                    backgroundColor: "#e0e0e0", // Light grey on hover
+                  },
+                  borderRadius: "20px", // Rounded buttons
+                  padding: "10px 20px", // Padding for better size
+                }}
+              >
+                Features
+              </Button>
+            </a>
+            <a
+              href="#AboutUs"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "#ffffff",
+                  color: "#3f51b5",
+                  "&:hover": {
+                    backgroundColor: "#e0e0e0", // Light grey on hover
+                  },
+                  borderRadius: "20px", // Rounded buttons
+                  padding: "10px 20px", // Padding for better size
+                }}
+              >
+                About Us
+              </Button>
+            </a>
+          </Stack>
+        ) : (
+          <Link to="/">
             <Button
               variant="contained"
               sx={{
@@ -39,26 +81,10 @@ export default function NavBar() {
                 padding: "10px 20px", // Padding for better size
               }}
             >
-              Features
+              Back To Home
             </Button>
-          </a>
-          <a href="#AboutUs" style={{ textDecoration: "none", color: "white" }}>
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#ffffff",
-                color: "#3f51b5",
-                "&:hover": {
-                  backgroundColor: "#e0e0e0", // Light grey on hover
-                },
-                borderRadius: "20px", // Rounded buttons
-                padding: "10px 20px", // Padding for better size
-              }}
-            >
-              About Us
-            </Button>
-          </a>
-        </Stack>
+          </Link>
+        )}
       </Toolbar>
     </AppBar>
   );

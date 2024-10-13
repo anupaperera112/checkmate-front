@@ -5,13 +5,26 @@ import {
   CardMedia,
   Typography,
   Button,
+  Box,
+  Chip,
 } from "@mui/material";
-
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import EventIcon from "@mui/icons-material/Event";
 import taskcardimage from "../asests/images/task-card-todo.jpg";
 
+const CustomCard = ({ task }) => {
+  const getStatusColor = (status) => {
+    switch (status?.toLowerCase()) {
+      case "completed":
+        return "success";
+      case "in progress":
+        return "warning";
+      case "pending":
+      default:
+        return "info";
+    }
+  };
 
-
-const CustomCard = ({task}) => {
   return (
     <Card
       sx={{
@@ -24,54 +37,49 @@ const CustomCard = ({task}) => {
           transform: "translateY(-10px)",
           boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)",
         },
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <CardMedia
         component="img"
-        height="200"
+        height="140"
         image={taskcardimage}
-        alt="Card Image"
+        alt="Task Card Image"
         sx={{ borderTopLeftRadius: "15px", borderTopRightRadius: "15px" }}
       />
-      <CardContent sx={{ textAlign: "center" }}>
-        <Typography variant="h5" component="div" gutterBottom>
+      <CardContent
+        sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}
+      >
+        <Typography variant="h6" component="div" gutterBottom noWrap>
           {task.taskTitle || "Dummy To Do"}
         </Typography>
-        <Typography
-          variant="body1"
-          color="primary"
-          fontWeight="bold"
-          gutterBottom
-        >
-         {task.taskStartDate
-        ? "Start date: " + task.taskStartDate.slice(0, 10)
-        : "Start date: 2024-01-07"}
-        </Typography>
-        <Typography
-          variant="body1"
-          color="primary"
-          fontWeight="bold"
-          gutterBottom
-        >
-                {task.taskEndDate
-        ? "End date: " + task.taskEndDate.slice(0, 10)
-        : "End date: 2024-07-01"}
-        </Typography>
-        <Button
-          variant="contained"
-          sx={{
-            backgroundColor: "#007bff",
-            "&:hover": { backgroundColor: "#0056b3" },
-            borderRadius: "20px",
-            padding: "10px 20px",
-          }}
-        >
-          {task.taskStatus ? task.taskStatus : "Pending"}
-        </Button>
+        <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+          <CalendarTodayIcon color="primary" fontSize="small" sx={{ mr: 1 }} />
+          <Typography variant="body2" color="text.secondary">
+            {task.taskStartDate
+              ? new Date(task.taskStartDate).toLocaleDateString()
+              : "2024-01-07"}
+          </Typography>
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+          <EventIcon color="secondary" fontSize="small" sx={{ mr: 1 }} />
+          <Typography variant="body2" color="text.secondary">
+            {task.taskEndDate
+              ? new Date(task.taskEndDate).toLocaleDateString()
+              : "2024-07-01"}
+          </Typography>
+        </Box>
+        <Box sx={{ mt: "auto" }}>
+          <Chip
+            label={task.taskStatus || "Pending"}
+            color={getStatusColor(task.taskStatus)}
+            sx={{ fontWeight: "bold", width: "100%" }}
+          />
+        </Box>
       </CardContent>
     </Card>
   );
 };
 
 export default CustomCard;
-
